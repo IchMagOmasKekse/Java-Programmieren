@@ -1,6 +1,6 @@
 package me.xxfreakdevxx.de.game;
 
-import me.xxfreakdevxx.de.game.object.GameObject;
+import me.xxfreakdevxx.de.game.gameobject.GameObject;
 
 public class Camera {
 	private float x,y;

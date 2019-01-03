@@ -1,7 +1,7 @@
 package me.xxfreakdevxx.de.game;
 
-import me.xxfreakdevxx.de.game.gameobject.Block;
 import me.xxfreakdevxx.de.game.gameobject.Location;
+import me.xxfreakdevxx.de.game.gameobject.block.Block;
 
 public class GameRaster {
 	

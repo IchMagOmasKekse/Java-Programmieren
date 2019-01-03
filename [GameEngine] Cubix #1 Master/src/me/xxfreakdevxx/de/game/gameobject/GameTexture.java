@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 public class GameTexture {
 	
 	/* System */
-	public BufferedImage image = null; //Die Texture
+	public BufferedImage texture = null; //Die Texture
 	public boolean isAnimation = false; //Ist diese Texture animiert?
 	
 	/* Animation */
@@ -17,11 +17,19 @@ public class GameTexture {
 	private boolean loop = true; //Soll die Animation immer wieder von vorne anfangen?
 	private boolean forward = true; //Animation soll vor- oder rückwärts abgespielt werden
 	private BufferedImage frames[] = new BufferedImage[100]; //Die einzelnen Frames
-	public GameTexture(BufferedImage image, boolean isAnimation) {
+	public GameTexture(BufferedImage texture, boolean isAnimation) {
 		super();
-		this.image = image;
+		this.texture = texture;
 		this.isAnimation = isAnimation;
 	}
+	
+	/* Standbild */
+	public BufferedImage getTexture() {
+		return texture;
+	}
+	
+	
+	/* Animation */
 	public int getPlaySpeed() {
 		return playSpeed;
 	}

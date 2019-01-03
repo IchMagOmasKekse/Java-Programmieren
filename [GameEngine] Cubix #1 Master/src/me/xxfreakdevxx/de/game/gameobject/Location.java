@@ -26,6 +26,9 @@ public class Location {
 	public double getX() {
 		return x;
 	}
+	public int getIntX() {
+		return (int)x;
+	}
 	public void setX(double x) {
 		this.x = x;
 	}
@@ -36,6 +39,9 @@ public class Location {
 	public double getY() {
 		return y;
 	}
+	public int getIntY() {
+		return (int)y;
+	}
 	public void setY(double y) {
 		this.y = y;
 	}
@@ -45,6 +51,9 @@ public class Location {
 
 	public double getZ() {
 		return z;
+	}
+	public int getIntZ() {
+		return (int)z;
 	}
 	public void setZ(double z) {
 		this.z = z;

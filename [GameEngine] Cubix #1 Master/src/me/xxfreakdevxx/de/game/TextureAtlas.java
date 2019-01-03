@@ -6,11 +6,12 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
-import me.xxfreakdevxx.de.game.object.Material;
+import me.xxfreakdevxx.de.game.gameobject.block.BlockMaterial;
 
 public class TextureAtlas {
 	
 	private BufferedImage image;
+	/* Der Key ist der Name des Materials, der bei Material.getDisplayName() zurückgegeben wird */
 	private HashMap<String, BufferedImage> textures;
 	
 	
@@ -44,11 +45,11 @@ public class TextureAtlas {
 	public void reloadTextures() {
 		/* Lädt alle Texturen neu und fügt sie zum Atlas(textures(hashmap)) hinzu */
 		textures.clear();
-		for(int i = 0; i < Material.values().length; i++) {
-			Material material = Material.values()[i];
-			textures.put(material.getName(), loadImage("/"+material.getName()+".png"));
+		for(int i = 0; i < BlockMaterial.values().length; i++) {
+			BlockMaterial material = BlockMaterial.values()[i];
+			textures.put(material.getDisplayname(), loadImage(material.getTexturePath()));
 		}
-		textures.put("monster", loadImage("/monster.png"));
+		textures.put("monster", loadImage("/assets/textures/entity/monster.png"));
 	}
 	
 	//Gibt alle Texturen zurück

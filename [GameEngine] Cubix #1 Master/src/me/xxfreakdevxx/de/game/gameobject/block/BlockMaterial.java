@@ -1,11 +1,13 @@
-package me.xxfreakdevxx.de.game.gameobject;
+package me.xxfreakdevxx.de.game.gameobject.block;
+
+import me.xxfreakdevxx.de.game.gameobject.ToolType;
 
 public enum BlockMaterial {
 	
 	/* Diese Klasse wird alle existierenden Materialien auflisten mit dazugehörigen Informationen */
 	
-	AIR(0, 0D, ToolType.MULTI_TOOL, "Luft", "block_air", "res/assets/textures/blocks/air.png", "not yet"),
-	STONE(1, 100D, ToolType.PICKAXE, "Stein", "block_stone", "res/assets/textures/blocks/stone.png", "not yet");
+	AIR(0, 0D, ToolType.MULTI_TOOL, "Luft", "block_air", "/assets/textures/blocks/air.png", "not yet"),
+	STONE(1, 100D, ToolType.PICKAXE, "Stein", "block_stone", "/assets/textures/blocks/stone.png", "not yet");
 	
 	int id = 0;
 	double healthpoints = 0D;
