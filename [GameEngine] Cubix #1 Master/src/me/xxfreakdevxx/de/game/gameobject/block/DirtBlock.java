@@ -7,23 +7,22 @@ import me.xxfreakdevxx.de.game.Game;
 import me.xxfreakdevxx.de.game.gameobject.GameTexture;
 import me.xxfreakdevxx.de.game.gameobject.Location;
 
-public class StoneBlock extends Block {
+public class DirtBlock extends Block {
 
-	public StoneBlock(Location location) {
-		super(location, new GameTexture(Game.getInstance().getTextureAtlas().getImage(BlockMaterial.STONE.getDisplayname()), false));
+	public DirtBlock(Location location) {
+		super(location, new GameTexture(Game.getInstance().getTextureAtlas().getImage(BlockMaterial.DIRT_BLOCK.getDisplayname()), false));
 		
 	}
 
 	@Override
 	public void render(Graphics g) {
 		g.drawImage(getGameTexture().getTexture(), getLocation().getIntX(), getLocation().getIntY(), Game.blocksize, Game.blocksize, null);
-		drawDirtTop(g);
 	}
 
 	@Override
 	public void tick() {
 		// TODO Auto-generated method stub
-		checkGrasTop();
+		
 	}
 
 	@Override

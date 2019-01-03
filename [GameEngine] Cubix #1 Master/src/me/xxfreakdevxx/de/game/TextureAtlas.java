@@ -50,6 +50,7 @@ public class TextureAtlas {
 			textures.put(material.getDisplayname(), loadImage(material.getTexturePath()));
 		}
 		textures.put("monster", loadImage("/assets/textures/entity/monster.png"));
+		textures.put("dirt_top_0", loadImage("/assets/textures/blocks/dirt_top_0.png"));
 	}
 	
 	//Gibt alle Texturen zurück

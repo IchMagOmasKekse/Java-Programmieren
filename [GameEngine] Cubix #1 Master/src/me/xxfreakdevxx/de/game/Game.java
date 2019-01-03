@@ -6,6 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
+import me.xxfreakdevxx.de.game.enviroment.GameWorld;
+
 @SuppressWarnings({"serial", "unused"})
 public class Game extends Canvas implements Runnable {
 	
@@ -26,6 +28,8 @@ public class Game extends Canvas implements Runnable {
 	private BufferedImage level = null;
 	private TextureAtlas textureAtlas;
 	public static int blocksize = 32;
+	private GameWorld world = null;
+	private GameRaster gameRaster = null;
 	
 	
 	public static void main(String[] args) {
@@ -33,16 +37,26 @@ public class Game extends Canvas implements Runnable {
 	}
 	
 	public Game() {
+		preInit();
+		init();
+		postInit();
+	}
+	
+	public void preInit() {
 		instance = this;
 		setBackground(Color.BLACK);
 		new Window(windowWidth, windowHeight, "GameEngine Preset", this);
 		start();
-		
+	}
+	public void init() {
 		camera = new Camera(0,0);
 		textureAtlas = new TextureAtlas();
+		world = new GameWorld();
+		gameRaster = new GameRaster();
 		this.addKeyListener(new KeyInput());
 		this.addMouseListener(new MouseInput());
-		
+	}
+	public void postInit() {
 		level = textureAtlas.loadImage("/wizard_level.png");
 		loadLevel(level);
 	}
@@ -99,7 +113,7 @@ public class Game extends Canvas implements Runnable {
 	
 	/* Steuert anderen Klassen an, in denen etwas getickt werden soll */
 	public void tick() {
-		
+		if(world != null) world.tick();
 	}
 	/* Gibt die aktuelle FPS anzahl zurück */
 	public int getFPS() {
@@ -124,7 +138,7 @@ public class Game extends Canvas implements Runnable {
 		g2d.translate(-camera.getX(), -camera.getY());
 		
 		//Klassen werden angesteuert
-//		handler.render(g); MUSS WEG
+		if(world != null) world.render(g);
 		g2d.translate(camera.getX(), camera.getY());
 		
 		g.dispose();
@@ -155,6 +169,14 @@ public class Game extends Canvas implements Runnable {
 	
 	public Camera getCamera() {
 		return camera;
+	}
+
+	public GameWorld getWorld() {
+		return world;
+	}
+
+	public GameRaster getGameRaster() {
+		return gameRaster;
 	}
 	
 }

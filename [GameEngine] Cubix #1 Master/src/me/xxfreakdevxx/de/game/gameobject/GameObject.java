@@ -34,11 +34,11 @@ public abstract class GameObject {
 		//TODO:
 	}
 	public Location getLocation() {
-		return location;
+		return location.clone();
 	}
 
 	public void setLocation(Location location) {
-		this.location = location;
+		this.location = location.clone();
 	}
 
 	public GameObjectType getGameObjectType() {

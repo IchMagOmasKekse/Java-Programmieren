@@ -12,7 +12,8 @@ public class GameRaster {
 	
 	//Gibt den Blöck zurück, der an Location XY ist
 	public Block getBlockAt(double x, double y) {
-		return null;
+		Location loc = new Location(x,y);
+		return game.getWorld().getBlocks().get(loc.getGameLocationString());
 	}
 	//Gibt den Blöck zurück, der an Location XY ist
 	public Block getBlockAt(Location loc) {
@@ -21,7 +22,9 @@ public class GameRaster {
 	
 	//Setz einen Block an Location XY
 	public boolean setBlock(Block block, double x, double y) {
-		return false;
+		Location loc = new Location(x,y);
+		game.getWorld().getBlocks().remove(loc.getGameLocationString());
+		return game.getWorld().registerObject(block);
 	}
 	//Setz einen Block an Location XY
 	public boolean setBlock(Block block, Location loc) {
