@@ -24,7 +24,8 @@ public abstract class Block extends GameObject {
 	public void checkGrasTop() {
 		Location loc = getLocation();
 		loc.addY(-Game.blocksize);
-		Block b = game.getGameRaster().getBlockAt(loc);
+		Block b = null;
+		if(game.getGameRaster() != null) b = game.getGameRaster().getBlockAt(loc);
 		if(b != null) {
 			if(b.getBlockMaterial() == BlockMaterial.DIRT_BLOCK || b.getBlockMaterial() == BlockMaterial.GRASS_BLOCK) hasDirtTop = true;			
 		}
@@ -32,6 +33,11 @@ public abstract class Block extends GameObject {
 	}
 	public void drawDirtTop(Graphics g) {
 		if(hasDirtTop)g.drawImage(dirtTop.getTexture(), getLocation().getIntX(), getLocation().getIntY(), Game.blocksize, Game.blocksize, null);
+	}
+	//---------------------------------------
+	
+	public Block(Location location, GameTexture gameTexture) {
+		super(GameObjectType.BLOCK, location, gameTexture);
 	}
 	
 	public BlockMaterial getBlockMaterial() {
@@ -44,9 +50,6 @@ public abstract class Block extends GameObject {
 		return toolMaterial;
 	}
 
-	public Block(Location location, GameTexture gameTexture) {
-		super(GameObjectType.BLOCK, location, gameTexture);
-	}
 	
 	/* Diese Methode soll den Loot droppen, wenn der Block zerstört wird */
 	public void dropLoot() {

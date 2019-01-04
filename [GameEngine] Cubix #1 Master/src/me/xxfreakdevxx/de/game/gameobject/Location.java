@@ -8,8 +8,8 @@ public class Location {
 	
 	private double x = 0d;
 	private double y = 0d;
-	private double z = 0d;
-	private int yaw = 0;
+	private double z = 0d; //Wird genutzt, um herauszufinden, ob der Spieler sich z.b. hinter einer Tür versteckt
+	private int yaw = 0; //Reichweite -180 bis 180. Gibt die Blick richtung des Spielers an
 	
 	private String gameStringMask = "%X:%Y:%Z/%YAW";
 	private String xReplacement = "%X";
@@ -87,7 +87,10 @@ public class Location {
 	}
 	public void setYaw(int yaw) {
 		this.yaw = yaw;
-	}	
+	}
+	public int calculateYaw() {
+		return 0; //MUSS NOCH PROGRAMMIERT WERDEN
+	}
 	/* Gibt den an das System angepassten Location String zurück */
 	public String getSystemLocationString() {
 		String s = gameStringMask;

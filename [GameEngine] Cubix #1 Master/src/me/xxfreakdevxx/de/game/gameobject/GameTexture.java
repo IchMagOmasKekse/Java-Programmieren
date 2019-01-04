@@ -7,6 +7,8 @@ public class GameTexture {
 	/* System */
 	public BufferedImage texture = null; //Die Texture
 	public boolean isAnimation = false; //Ist diese Texture animiert?
+	public int width = 32;
+	public int height = 32;
 	
 	/* Animation */
 	private int playSpeed = 1; //Wiedergabe geschwindkeit
@@ -28,6 +30,24 @@ public class GameTexture {
 		return texture;
 	}
 	
+	/* Allgemein */
+	public int getWidth() {
+		return width;
+	}
+	public void setWidth(int width) {
+		this.width = width;
+	}
+	public GameTexture setSize(int width, int height) {
+		this.width = width;
+		this.height = height;
+		return this;
+	}
+	public int getHeight() {
+		return height;
+	}
+	public void setHeight(int height) {
+		this.height = height;
+	}
 	
 	/* Animation */
 	public int getPlaySpeed() {
@@ -79,4 +99,5 @@ public class GameTexture {
 	public GameTexture getLastFrame() {
 		return new GameTexture(getFrames()[frameAmount-1], false);
 	}
+	
 }

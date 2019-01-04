@@ -20,14 +20,14 @@ public class Game extends Canvas implements Runnable {
 	public static Game getInstance() {return instance;}
 	private Thread thread;
 	private boolean isRunning = false;
+	public static boolean DEBUG = false;
 	
 	
 	/* Game */
 	public static int FPS = 0;
-	private Camera camera;
 	private BufferedImage level = null;
 	private TextureAtlas textureAtlas;
-	public static int blocksize = 32;
+	public static int blocksize = 24;
 	private GameWorld world = null;
 	private GameRaster gameRaster = null;
 	
@@ -49,7 +49,6 @@ public class Game extends Canvas implements Runnable {
 		start();
 	}
 	public void init() {
-		camera = new Camera(0,0);
 		textureAtlas = new TextureAtlas();
 		world = new GameWorld();
 		gameRaster = new GameRaster();
@@ -99,8 +98,6 @@ public class Game extends Canvas implements Runnable {
 			}
 			//Zeitpunkt zum ansteuern anderer Methoden
 			render();
-			
-			
 			frames++;
 			Game.FPS = frames;
 			if(System.currentTimeMillis() - timer > 1000) {
@@ -135,11 +132,13 @@ public class Game extends Canvas implements Runnable {
 		g.fillRect(0, 0, windowWidth, windowHeight);
 		//Verschiebung durch Kamera Coords.
 		//Dies ermöglich Kamerabewegung
-		g2d.translate(-camera.getX(), -camera.getY());
-		
-		//Klassen werden angesteuert
-		if(world != null) world.render(g);
-		g2d.translate(camera.getX(), camera.getY());
+		if(getWorld() != null) {
+			g2d.translate(-getWorld().camera.getX(), -getWorld().camera.getY());
+			
+			//Klassen werden angesteuert
+			getWorld().render(g);
+			g2d.translate(getWorld().camera.getX(), getWorld().camera.getY());			
+		}
 		
 		g.dispose();
 		bs.show();
@@ -168,7 +167,7 @@ public class Game extends Canvas implements Runnable {
 	}
 	
 	public Camera getCamera() {
-		return camera;
+		return getWorld().camera;
 	}
 
 	public GameWorld getWorld() {

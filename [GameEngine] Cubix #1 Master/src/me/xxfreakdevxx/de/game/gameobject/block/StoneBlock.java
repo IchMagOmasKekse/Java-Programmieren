@@ -1,7 +1,6 @@
 package me.xxfreakdevxx.de.game.gameobject.block;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
 
 import me.xxfreakdevxx.de.game.Game;
 import me.xxfreakdevxx.de.game.gameobject.GameTexture;
@@ -10,7 +9,7 @@ import me.xxfreakdevxx.de.game.gameobject.Location;
 public class StoneBlock extends Block {
 
 	public StoneBlock(Location location) {
-		super(location, new GameTexture(Game.getInstance().getTextureAtlas().getImage(BlockMaterial.STONE.getDisplayname()), false));
+		super(location, new GameTexture(Game.getInstance().getTextureAtlas().getImage(BlockMaterial.STONE.getDisplayname()), false).setSize(Game.blocksize, Game.blocksize));
 		
 	}
 
@@ -24,11 +23,6 @@ public class StoneBlock extends Block {
 	public void tick() {
 		// TODO Auto-generated method stub
 		checkGrasTop();
-	}
-
-	@Override
-	public Rectangle getBounds() {
-		return new Rectangle(getLocation().getIntX(), getLocation().getIntY(), Game.blocksize, Game.blocksize);
 	}
 
 }
