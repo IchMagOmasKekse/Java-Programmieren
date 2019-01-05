@@ -18,6 +18,8 @@ public abstract class Block extends GameObject {
 //	public ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
 	public double healthPoints = 100D;
 	
+	public long lastTicked = 0;
+	
 	/* Temporär */
 	public boolean hasDirtTop = false;
 	public GameTexture dirtTop = new GameTexture(game.getTextureAtlas().getImage("dirt_top_0"), false);
@@ -38,6 +40,17 @@ public abstract class Block extends GameObject {
 	
 	public Block(Location location, GameTexture gameTexture) {
 		super(GameObjectType.BLOCK, location, gameTexture);
+	}
+	
+	/*
+	 * processBlockProperty() bedeutet: Die Funktion des Blocks,
+	 * z.b: der Baum überprüft, ob er wachsen soll
+	 * wird ausgeführt
+	 */
+	public abstract void processBlockProperty(); 
+	
+	public void storeCurrentTime() {
+		this.lastTicked = System.currentTimeMillis();
 	}
 	
 	public BlockMaterial getBlockMaterial() {

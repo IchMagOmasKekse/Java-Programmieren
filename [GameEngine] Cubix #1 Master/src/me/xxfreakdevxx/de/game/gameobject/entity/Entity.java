@@ -6,12 +6,14 @@ import me.xxfreakdevxx.de.game.CodeGenerator;
 import me.xxfreakdevxx.de.game.gameobject.GameObject;
 import me.xxfreakdevxx.de.game.gameobject.GameObjectType;
 import me.xxfreakdevxx.de.game.gameobject.GameTexture;
+import me.xxfreakdevxx.de.game.gameobject.GameVector;
+import me.xxfreakdevxx.de.game.gameobject.Gravity;
 import me.xxfreakdevxx.de.game.gameobject.Location;
 
 public abstract class Entity extends GameObject{
 	
 	
-	/* Gameplaye */
+	/* Gameplay */
 	protected double healthpoints = 0d; //Lebenspunkte des Entity
 	protected double defense = 0d; //Abwehrpunkte
 	protected String customname = ""; //Beliebiger Anzeigename
@@ -22,6 +24,9 @@ public abstract class Entity extends GameObject{
 	protected boolean isFalling = false; //Fällt es?
 	protected boolean isOnGround = false; //Ist es auf dem Boden?
 	protected boolean isOnFire = false; //Brennt es?
+	//Movement
+	private float weight = 1.2f; //Gewicht in KG
+	public GameVector velocity = new GameVector(0,0); //Die Bewegungsrichtungen
 	/* System */
 	public GameObject gameObject = null;
 	protected EntityType entitytype = EntityType.UNDEFINED;
@@ -44,9 +49,14 @@ public abstract class Entity extends GameObject{
 		this.customname = "";
 		this.entityId = CodeGenerator.generateEntityId();
 	}
-
 	public abstract void teleport(Location location);
 	
+	public void addGravity() {
+		if(Collision.isCollidingGround(this)) velocity.setY(0);
+		double gravity = Gravity.gravityPerWeight*weight;
+		if(gravity >= Gravity.maximalGravitySpeed) gravity = Gravity.maximalGravitySpeed;
+		velocity.addY(gravity);
+	}
 	public double getHealthpoints() {
 		return healthpoints;
 	}
@@ -111,6 +121,12 @@ public abstract class Entity extends GameObject{
 	}
 	public String getEntityId() {
 		return entityId;
+	}
+	public float getWeight() {
+		return weight;
+	}
+	public GameVector getVelocity() {
+		return velocity;
 	}
 	
 }

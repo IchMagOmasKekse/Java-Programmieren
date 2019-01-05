@@ -17,7 +17,9 @@ public abstract class GameObject {
 	//Movement
 	private boolean hasGravity = false; //Bestimmt die Gravitatiosn Einwirkung
 	public double movementSpeed = 1.5d; //Bestimmt die Bewegungsgeschwindigkeit des GameObjects
+//	public double movementSpeed = 6d; //Bestimmt die Bewegungsgeschwindigkeit des GameObjects
 	private Location location = null; //Location wo sich das Entity befidnet
+	
 	//Rendering
 	private boolean drawHitbox = false; //Soll die Hitbox gezeichnet werden?
 	public Color hitboxColor = new Color(0.5f, 0.0f, 0.0f, 0.5f); //Die Farbe, in der die Hitbox gezeichnet werden soll
@@ -39,6 +41,8 @@ public abstract class GameObject {
 	public Rectangle getBounds() {
 		return new Rectangle(getLocation().getIntX(), getLocation().getIntY(), width, height);
 	}
+	
+
 	
 	public void remove() {
 		//game.getGameWorld().unregisterObject(this);

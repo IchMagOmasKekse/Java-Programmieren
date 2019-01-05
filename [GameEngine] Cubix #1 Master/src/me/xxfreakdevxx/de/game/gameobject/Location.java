@@ -11,11 +11,11 @@ public class Location {
 	private double z = 0d; //Wird genutzt, um herauszufinden, ob der Spieler sich z.b. hinter einer Tür versteckt
 	private int yaw = 0; //Reichweite -180 bis 180. Gibt die Blick richtung des Spielers an
 	
-	private String gameStringMask = "%X:%Y:%Z/%YAW";
+	private String gameStringMask = "%X:%Y:%Z/%yaw";
 	private String xReplacement = "%X";
 	private String yReplacement = "%Y";
 	private String zReplacement = "%Z";
-	private String yawReplacement = "%YAW";
+	private String yawReplacement = "%yaw";
 	
 	public Location(double x, double y, double z, int yaw) {
 		this.x = x;
@@ -91,6 +91,16 @@ public class Location {
 	public int calculateYaw() {
 		return 0; //MUSS NOCH PROGRAMMIERT WERDEN
 	}
+	public void add(double x, double y, double z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
+	public void add(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+	
 	/* Gibt den an das System angepassten Location String zurück */
 	public String getSystemLocationString() {
 		String s = gameStringMask;
@@ -101,6 +111,7 @@ public class Location {
 		s = s.replace(yReplacement, y+"");
 		s = s.replace(zReplacement, z+"");
 		s = s.replace(yawReplacement, "");
+		s = s.replace("/", "");
 		return s;
 	}
 	/* Gibt den erweiterten und an das System angepassten Location String zurück */

@@ -1,12 +1,17 @@
 package me.xxfreakdevxx.de.game;
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
 import me.xxfreakdevxx.de.game.enviroment.GameWorld;
+import me.xxfreakdevxx.de.game.gameobject.Location;
+import me.xxfreakdevxx.de.game.view.HUD;
 
 @SuppressWarnings({"serial", "unused"})
 public class Game extends Canvas implements Runnable {
@@ -50,8 +55,9 @@ public class Game extends Canvas implements Runnable {
 	}
 	public void init() {
 		textureAtlas = new TextureAtlas();
-		world = new GameWorld();
 		gameRaster = new GameRaster();
+		world = new GameWorld();
+		world.generateWorld();
 		this.addKeyListener(new KeyInput());
 		this.addMouseListener(new MouseInput());
 	}
@@ -99,9 +105,9 @@ public class Game extends Canvas implements Runnable {
 			//Zeitpunkt zum ansteuern anderer Methoden
 			render();
 			frames++;
-			Game.FPS = frames;
 			if(System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
+				Game.FPS = frames;
 				frames = 0;
 			}
 		}
@@ -137,7 +143,8 @@ public class Game extends Canvas implements Runnable {
 			
 			//Klassen werden angesteuert
 			getWorld().render(g);
-			g2d.translate(getWorld().camera.getX(), getWorld().camera.getY());			
+			g2d.translate(getWorld().camera.getX(), getWorld().camera.getY());
+			HUD.drawDebugInfos(g);
 		}
 		
 		g.dispose();
@@ -176,6 +183,39 @@ public class Game extends Canvas implements Runnable {
 
 	public GameRaster getGameRaster() {
 		return gameRaster;
+	}
+	public static int calculateStringWidth(Font font, String enteredText) {
+		BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+		FontMetrics fm = img.getGraphics().getFontMetrics(font);
+		int width = fm.stringWidth(enteredText);
+		return width;
+	}
+	/* Rechnet aus, ob eine Location sich innerhalb des Spiel-Fensters befindet
+	 * und gibt das Ergebnis zurück */
+	public static boolean checkIfInWindow(Location loc) {
+		Camera cam = Game.getInstance().getCamera();
+		int windowWidth = (int)((int)Game.windowWidth-cam.getX());
+		int windowHeight = (int)((int)Game.windowHeight-cam.getY());
+		int x = (int)((int)loc.getIntX()-cam.getX());
+		int y = (int)((int)loc.getIntY()-cam.getY());
+		
+		Rectangle screen = new Rectangle((int)cam.getX(),
+				(int)cam.getY(),
+				windowWidth+(int)cam.getX(),
+				windowHeight+(int)cam.getY());
+		Rectangle locRect = new Rectangle(x,y,1,1);
+		return screen.intersects(locRect);
+	}
+	public static boolean checkIfInWindow(Rectangle rect) {
+		Camera cam = Game.getInstance().getCamera();
+		int windowWidth = (int)((int)Game.windowWidth-cam.getX());
+		int windowHeight = (int)((int)Game.windowHeight-cam.getY());
+		
+		Rectangle screen = new Rectangle((int)cam.getX(),
+				(int)cam.getY(),
+				windowWidth+(int)cam.getX(),
+				windowHeight+(int)cam.getY());
+		return screen.intersects(rect);
 	}
 	
 }

@@ -25,4 +25,10 @@ public class StoneBlock extends Block {
 		checkGrasTop();
 	}
 
+	@Override
+	public void processBlockProperty() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

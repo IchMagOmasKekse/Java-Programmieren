@@ -14,10 +14,12 @@ public class EntityControls {
 	
 	public void setGoLeft(boolean goLeft) {
 		this.goLeft = goLeft;
+		if(goLeft) this.goRight = false;
 		this.entity.getUnClonedLocation().setYaw(-90);
 	}
 	public void setGoRight(boolean goRight) {
 		this.goRight = goRight;
+		if(goRight) this.goLeft = false;
 		this.entity.getUnClonedLocation().setYaw(90);
 	}
 	public void setSneak(boolean sneak) {

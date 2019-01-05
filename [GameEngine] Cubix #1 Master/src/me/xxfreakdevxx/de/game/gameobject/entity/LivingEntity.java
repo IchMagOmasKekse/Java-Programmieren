@@ -1,5 +1,6 @@
 package me.xxfreakdevxx.de.game.gameobject.entity;
 
+import me.xxfreakdevxx.de.game.Console;
 import me.xxfreakdevxx.de.game.gameobject.GameTexture;
 import me.xxfreakdevxx.de.game.gameobject.Location;
 
@@ -24,6 +25,9 @@ public abstract class LivingEntity extends Entity {
 	public void move() {
 		if(getEntityControls().getGoLeft()) getUnClonedLocation().addX(-movementSpeed);
 		if(getEntityControls().getGoRight()) getUnClonedLocation().addX(movementSpeed);
+		getUnClonedLocation().addY(getVelocity().getJump());Console.send("LivingEntity", "Jump: "+getVelocity().getJump());
+		//Gravity
+		getUnClonedLocation().addY(getVelocity().getY());
 	}
 
 }

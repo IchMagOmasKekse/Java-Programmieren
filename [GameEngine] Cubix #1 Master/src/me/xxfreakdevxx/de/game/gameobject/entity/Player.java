@@ -26,7 +26,5 @@ public class Player extends LivingEntity {
 
 	@Override
 	public void tick() {
-		//Movement
-		move();
 	}
 }

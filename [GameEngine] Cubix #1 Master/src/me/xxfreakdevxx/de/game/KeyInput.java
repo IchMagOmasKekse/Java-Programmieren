@@ -14,7 +14,7 @@ public class KeyInput extends KeyAdapter {
 		if(key == KeyEvent.VK_A) Game.getInstance().getWorld().getPlayer().getEntityControls().setGoLeft(true);
 		if(key == KeyEvent.VK_D) Game.getInstance().getWorld().getPlayer().getEntityControls().setGoRight(true);
 		if(key == KeyEvent.VK_S || key == KeyEvent.VK_SHIFT) Game.getInstance().getWorld().getPlayer().getEntityControls().setSneak(true);
-		if(key == KeyEvent.VK_SPACE) Game.getInstance().getWorld().getPlayer().getEntityControls().setJump(true);
+		if(key == KeyEvent.VK_SPACE || key == KeyEvent.VK_W) Game.getInstance().getWorld().getPlayer().getVelocity().jump(4);
 	}
 	
 	public void keyReleased(KeyEvent e) {
@@ -22,7 +22,7 @@ public class KeyInput extends KeyAdapter {
 		if(key == KeyEvent.VK_A) Game.getInstance().getWorld().getPlayer().getEntityControls().setGoLeft(false);
 		if(key == KeyEvent.VK_D) Game.getInstance().getWorld().getPlayer().getEntityControls().setGoRight(false);
 		if(key == KeyEvent.VK_S || key == KeyEvent.VK_SHIFT) Game.getInstance().getWorld().getPlayer().getEntityControls().setSneak(false);
-		if(key == KeyEvent.VK_SPACE) Game.getInstance().getWorld().getPlayer().getEntityControls().setJump(false);
+		if(key == KeyEvent.VK_SPACE || key == KeyEvent.VK_W) Game.getInstance().getWorld().getPlayer().getEntityControls().setJump(false);
 	}
 	
 }

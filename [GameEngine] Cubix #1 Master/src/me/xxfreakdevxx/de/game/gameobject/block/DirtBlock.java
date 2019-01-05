@@ -25,4 +25,10 @@ public class DirtBlock extends Block {
 		
 	}
 
+	@Override
+	public void processBlockProperty() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

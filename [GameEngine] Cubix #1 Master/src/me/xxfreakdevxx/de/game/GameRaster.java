@@ -1,13 +1,17 @@
 package me.xxfreakdevxx.de.game;
 
+import me.xxfreakdevxx.de.game.enviroment.ChunkManager;
 import me.xxfreakdevxx.de.game.gameobject.Location;
 import me.xxfreakdevxx.de.game.gameobject.block.Block;
 
 public class GameRaster {
 	
 	private Game game = Game.getInstance();
+	private ChunkManager chunkManager;
 	
-	public GameRaster() {}
+	public GameRaster() {
+		this.chunkManager = new ChunkManager();
+	}
 	
 	
 	//Gibt den Blöck zurück, der an Location XY ist
@@ -53,6 +57,8 @@ public class GameRaster {
 		return destroyBlockAt(loc.getX(), loc.getY());
 	}
 	
-	
+	public ChunkManager getChunkManager() {
+		return chunkManager;
+	}
 	
 }
